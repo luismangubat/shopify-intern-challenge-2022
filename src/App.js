@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const API_KEY = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa";
@@ -7,43 +7,36 @@ const API_KEY = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1
 
 function App() {
 
-  const [photoData, setPhotodata] = useState("");
+  const [photoData, setPhotoData] = useState(null);
   const [searchVal, setSearchVal] = useState("");
 
-  const getPhotoData = async (searchVal) => {
-    try {
-      const url = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa";
-      const response =  await fetch(url);
-      const responseJson = await response.json();
-      console.log(response)
-      
-      if (responseJson.Search) {
-        setMovies(responseJson.Search);
-      } 
-        return []
-    } catch (err) {
-      console.log(err)
+  useEffect(() => {
+
+    fetchPhotoData();
+
+    async function fetchPhotoData() {
+      const res = await fetch(API_KEY);
+      const data = await res.json();
+
+      setPhotoData(data);
     }
-  };
+  }, []);
 
-
+  if (!photoData) return <div/>;
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <img
+        src={photoData.url}
+        alt={photoData.title}
+        className='photo'
+        />
+
+        <div className='inner-container'>
+          <h1>{photoData.title}</h1>
+          <p className ="date">{photoData.date}</p>
+          <p className="explenation">{photoData.explanation}</p>
+        </div>
     </div>
   );
 }
