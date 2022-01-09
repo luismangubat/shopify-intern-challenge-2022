@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from "styled-components";
+import Card from './components/Card';
+
 
 const API_KEY = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa";
 
@@ -14,10 +16,12 @@ const ContentContainer = styled.div`
   padding: 2rem 1rem;
   flex-direction: column;
   max-width: 1080px;
+
   @media (min-width: 769px) {
     width: 70%;
     margin: auto;
   }
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -33,7 +37,7 @@ const HeaderContainer = styled.div`
 function App() {
 
   const [photoData, setPhotoData] = useState(null);
-  const [searchVal, setSearchVal] = useState("");
+  //const [searchVal, setSearchVal] = useState("");
 
   useEffect(() => {
 
@@ -55,18 +59,7 @@ function App() {
       <HeaderContainer>
         <h1>Spacetagram</h1>
       </HeaderContainer>
-
-      <img
-        src={photoData.url}
-        alt={photoData.title}
-        className='photo'
-      />
-
-      <div className='inner-container'>
-        <h1>{photoData.title}</h1>
-        <p className="date">{photoData.date}</p>
-        <p className="explenation">{photoData.explanation}</p>
-      </div>
+      <Card photo={photoData}/>
       </ContentContainer>
     </AppContainer>
   );
