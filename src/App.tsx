@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Card from './components/Card';
+import Navbar from './components/Navbar';
 
 
 const API_KEY = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa";
 
-const AppContainer = styled.div`
-  display: flex;
-  height: 100%;
-`;
 
 const ContentContainer = styled.div`
   position: relative;
@@ -54,14 +51,15 @@ function App() {
   if (!photoData) return <div />;
 
   return (
-    <AppContainer className="container">
+    <div className="container">
+      <Navbar/>
       <ContentContainer>
-      <HeaderContainer>
-        <h1>Spacetagram</h1>
-      </HeaderContainer>
-      <Card photo={photoData}/>
+        <HeaderContainer>
+          <h1>Spacetagram</h1>
+        </HeaderContainer>
+        <Card photo={photoData} />
       </ContentContainer>
-    </AppContainer>
+    </div>
   );
 }
 

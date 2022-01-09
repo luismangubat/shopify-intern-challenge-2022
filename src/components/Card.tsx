@@ -1,29 +1,41 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Photo } from '../utils/interfaces';
 
 interface CardProps {
   photo: Photo;
 }
+const CardContainer = styled.div`
+max-width: 400px;
+
+`;
+
+const ImageContainer = styled.img`
+  max-width: 300px
+`;
+
+const InnerContainer = styled.div`
+  max-height: 100px
+`;
+
 
 const Card = ({ photo }: CardProps) => {
 
   const { url, title, date, explanation } = photo;
 
-
   return (
-    <div>
-      <img
+    <CardContainer>
+      <ImageContainer
         src={url}
         alt={title}
         className='photo-image'
       />
-      <div className='inner-container'>
+      <InnerContainer>
         <h1>{title}</h1>
         <p className="date">{date}</p>
         <p className="explenation">{explanation}</p>
-      </div>
-
-    </div>
+      </InnerContainer>
+    </CardContainer>
   )
 }
 
