@@ -1,8 +1,33 @@
-import './App.css';
 import { useState, useEffect } from 'react';
-
+import styled from "styled-components";
 
 const API_KEY = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa";
+
+const AppContainer = styled.div`
+  display: flex;
+  height: 100%;
+`;
+
+const ContentContainer = styled.div`
+  position: relative;
+  display: flex;
+  padding: 2rem 1rem;
+  flex-direction: column;
+  max-width: 1080px;
+  @media (min-width: 769px) {
+    width: 70%;
+    margin: auto;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+`;
 
 
 function App() {
@@ -22,22 +47,28 @@ function App() {
     }
   }, []);
 
-  if (!photoData) return <div/>;
+  if (!photoData) return <div />;
 
   return (
-    <div className="container">
+    <AppContainer className="container">
+      <ContentContainer>
+      <HeaderContainer>
+        <h1>Spacetagram</h1>
+      </HeaderContainer>
+
       <img
         src={photoData.url}
         alt={photoData.title}
         className='photo'
-        />
+      />
 
-        <div className='inner-container'>
-          <h1>{photoData.title}</h1>
-          <p className ="date">{photoData.date}</p>
-          <p className="explenation">{photoData.explanation}</p>
-        </div>
-    </div>
+      <div className='inner-container'>
+        <h1>{photoData.title}</h1>
+        <p className="date">{photoData.date}</p>
+        <p className="explenation">{photoData.explanation}</p>
+      </div>
+      </ContentContainer>
+    </AppContainer>
   );
 }
 
