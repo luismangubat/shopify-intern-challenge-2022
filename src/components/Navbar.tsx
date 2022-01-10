@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
-  BrowserRouter as Router,
-  //Switch,
-  Route,
   Link
 } from "react-router-dom";
 
 export const Nav = styled.nav`
-  background: #ededed;
+  background: #002F2E;
+  color: white;
   height: 70px;
   display: flex;
   justify-content: space-between;
@@ -45,6 +43,12 @@ export const NavMenu = styled.div`
   }
 `;
 
+export const Pages = styled.nav`
+  display: flex;
+`;
+
+
+
 export const NavBtn = styled.nav`
   display: flex;
   align-items: center;
@@ -75,20 +79,21 @@ export const NavBtnLink = styled(Link)`
   }
 `;
 
-
-
 const Navbar = () => {
+  const pages = ["Search", "Likes", "Date"]
   return (
-    <Nav>
-      <NavMenu>
-        <h1>Spacetagram</h1>
-
-        
-        <h2>Favourite</h2>
-        <h2>About</h2>
-        <Link to='hello'>hello</Link>
-      </NavMenu>
-    </Nav>
+    <header>
+      <Nav>
+        <NavMenu>
+          <h1>Spacetagram</h1>
+          </NavMenu>
+          <Pages>
+            {pages.map(page => (
+              <NavBtn>{page}</NavBtn>
+            ))}
+          </Pages>
+      </Nav>
+    </header>
   )
 }
 

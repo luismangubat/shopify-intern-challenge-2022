@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Photo } from '../utils/interfaces';
 
@@ -21,12 +21,13 @@ const InnerContainer = styled.div`
 
 const Card = ({ photo }: CardProps) => {
 
-  const { url, title, date, explanation } = photo;
-
+  const { url, title, date, explanation, media_type } = photo;
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  console.log("thumbail url", url)
   return (
     <CardContainer>
       <ImageContainer
-        src={url}
+        src={media_type === "video" ? thumbnail_url : url }
         alt={title}
         className='photo-image'
       />

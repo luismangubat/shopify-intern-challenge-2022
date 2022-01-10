@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from "styled-components";
 import Card from './components/Card';
 import Navbar from './components/Navbar';
 
-
 const API_KEY = "https://api.nasa.gov/planetary/apod?api_key=g9M8wUGMcefg71f0dj1NmB4LblvvgSwFPv6BVZPa";
-
 
 const ContentContainer = styled.div`
   position: relative;
@@ -33,7 +32,7 @@ const HeaderContainer = styled.div`
 
 function App() {
 
-  const [photoData, setPhotoData] = useState(null);
+  const [photoData, setPhotoData] = useState(null);  
   //const [searchVal, setSearchVal] = useState("");
 
   useEffect(() => {
@@ -52,13 +51,15 @@ function App() {
 
   return (
     <div className="container">
-      <Navbar/>
-      <ContentContainer>
-        <HeaderContainer>
-          <h1>Spacetagram</h1>
-        </HeaderContainer>
-        <Card photo={photoData} />
-      </ContentContainer>
+      <Navbar />
+      <BrowserRouter>
+        <ContentContainer>
+          <HeaderContainer>
+            <h1>Spacetagram</h1>
+          </HeaderContainer>
+          <Card photo={photoData} />
+        </ContentContainer>
+      </BrowserRouter>
     </div>
   );
 }

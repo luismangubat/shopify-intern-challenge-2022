@@ -4,5 +4,6 @@ export interface Photo {
   title: string;
   explanation: string;
   liked: boolean;
+  media_type: string;
+  thumbnail_url: string
 }
-
